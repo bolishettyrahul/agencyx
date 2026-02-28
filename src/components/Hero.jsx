@@ -1,5 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { gsap } from 'gsap'
+import SplitType from 'split-type'
 import { Spotlight } from '@/components/ui/spotlight'
 
 /* ─────────────────────────────────────────────
@@ -162,19 +164,19 @@ export default function Hero() {
   const badgeRef    = useRef(null)
 
   useEffect(() => {
-    const ctx = window.gsap?.context(() => {
-      const split = new window.SplitType(headlineRef.current, { types: 'lines,words' })
-      window.gsap.set(split.words, { yPercent: 110, opacity: 0 })
-      window.gsap.to(split.words, {
+    const ctx = gsap.context(() => {
+      const split = new SplitType(headlineRef.current, { types: 'lines,words' })
+      gsap.set(split.words, { yPercent: 110, opacity: 0 })
+      gsap.to(split.words, {
         yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.04, ease: 'power4.out', delay: 0.2,
       })
-      window.gsap.fromTo(
+      gsap.fromTo(
         [badgeRef.current, subRef.current, btnsRef.current],
         { autoAlpha: 0, y: 20 },
         { autoAlpha: 1, y: 0, duration: 0.85, stagger: 0.12, ease: 'power3.out', delay: 0.6 }
       )
     }, heroRef)
-    return () => ctx?.revert()
+    return () => ctx.revert()
   }, [])
 
   return (
