@@ -65,6 +65,11 @@ body {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 /* ═══ Glass Utility ═══ */
@@ -245,12 +250,5 @@ html {
   to { transform: rotate(360deg); }
 }
 
-/* ═══ Content Visibility — defer paint for off-screen sections ═══ */
-/* rendering-content-visibility: skip rendering of off-screen content */
-#overview,
-#services,
-#roadmap,
-#access {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
-}
+/* ═══ Content Visibility — skip paint for off-screen sections ═══ */
+/* NOTE: content-visibility removed — causes Safari iOS layout bugs */

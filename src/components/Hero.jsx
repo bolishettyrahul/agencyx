@@ -192,9 +192,10 @@ export default function Hero() {
       />
 
       {/* ── Content: grows to fill viewport, split 50/50 ── */}
-      <div className="flex flex-col md:flex-row flex-1 min-h-screen">
+      <div className="flex flex-col md:flex-row flex-1">
           {/* ── Left: Copy ── */}
-          <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 md:px-20 py-28 md:py-0 relative z-10">
+          <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 md:px-20
+            pt-28 sm:pt-32 md:pt-0 pb-12 md:pb-0 relative z-10">
             {/* Badge */}
             <motion.div
               {...fadeUp(0.15)}
@@ -217,7 +218,7 @@ export default function Hero() {
                     initial={{ yPercent: 110, opacity: 0 }}
                     animate={{ yPercent: 0, opacity: 1 }}
                     transition={{ duration: 1.1, delay: 0.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="font-bold leading-[1.06] tracking-tight text-[clamp(34px,5vw,68px)]"
+                    className="font-bold leading-[1.06] tracking-tight text-[clamp(30px,7vw,68px)]"
                     style={{
                       background: 'linear-gradient(140deg,#f5f5f5 0%,#a3a3a3 100%)',
                       WebkitBackgroundClip: 'text',
@@ -268,7 +269,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Stats */}
-            <motion.div {...fadeUp(0.85)} className="flex gap-7 mt-10 pt-8 border-t border-white/[0.06]">
+            <motion.div {...fadeUp(0.85)} className="flex gap-5 sm:gap-7 mt-8 pt-6 sm:pt-8 border-t border-white/[0.06]">
               {[
                 { value: '50+',  label: 'Projects' },
                 { value: '10×',  label: 'Avg ROI'  },
@@ -285,13 +286,13 @@ export default function Hero() {
           </div>
 
           {/* ── Right: Animated workflow visual ── */}
-          <div className="flex-1 relative border-t md:border-t-0 md:border-l border-white/[0.05] min-h-[420px] md:min-h-0">
+          <div className="flex-1 relative border-t md:border-t-0 md:border-l border-white/[0.05] min-h-[380px] sm:min-h-[440px] md:min-h-0">
             <WorkflowVisual />
           </div>
         </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[2] flex flex-col items-center gap-2">
+      {/* Scroll indicator — desktop only */}
+      <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-[2] flex-col items-center gap-2">
         <div
           className="w-px h-10 bg-gradient-to-b from-white/20 to-transparent"
           style={{ animation: 'scroll-line 2s cubic-bezier(0.16,1,0.3,1) infinite' }}
