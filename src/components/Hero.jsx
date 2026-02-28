@@ -44,12 +44,12 @@ function WorkflowNode({ node, index }) {
       className="flex flex-col items-center gap-1.5"
     >
       <div
-        className="relative rounded-xl px-3 py-2.5 text-center"
+        className="relative rounded-xl px-2 sm:px-3 py-2 sm:py-2.5 text-center"
         style={{
           background: 'rgba(18,18,26,0.95)',
           border: '1px solid rgba(139,92,246,0.22)',
           boxShadow: node.id === 'ai' ? '0 0 24px rgba(139,92,246,0.18)' : 'none',
-          minWidth: 80,
+          minWidth: 60,
         }}
       >
         {/* pulse ring on AI node */}
@@ -60,9 +60,9 @@ function WorkflowNode({ node, index }) {
             transition={{ duration: 2.4, repeat: Infinity }}
           />
         )}
-        <div className="text-lg mb-0.5">{node.icon}</div>
-        <div className="text-[11px] font-semibold text-white tracking-wide">{node.label}</div>
-        <div className="text-[9px] text-neutral-500 mt-0.5 leading-tight">{node.sublabel}</div>
+        <div className="text-base sm:text-lg mb-0.5">{node.icon}</div>
+        <div className="text-[10px] sm:text-[11px] font-semibold text-white tracking-wide">{node.label}</div>
+        <div className="hidden sm:block text-[9px] text-neutral-500 mt-0.5 leading-tight">{node.sublabel}</div>
       </div>
     </motion.div>
   )
@@ -71,7 +71,7 @@ function WorkflowNode({ node, index }) {
 /* Animated right panel */
 function WorkflowVisual() {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-10 relative select-none">
+    <div className="w-full h-full flex flex-col items-center justify-center p-5 sm:p-6 md:p-10 relative select-none">
       {/* background grid */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.035]"
@@ -91,7 +91,7 @@ function WorkflowVisual() {
       </motion.p>
 
       {/* Nodes row with connectors */}
-      <div className="flex items-center w-full max-w-[520px] mb-8">
+      <div className="flex items-center w-full max-w-[520px] mb-8 overflow-x-auto pb-1">
         {NODES.map((node, i) => (
           <>
             <WorkflowNode key={node.id} node={node} index={i} />
@@ -112,7 +112,7 @@ function WorkflowVisual() {
       </div>
 
       {/* Metric cards */}
-      <div className="flex flex-wrap gap-3 justify-center mt-6">
+      <div className="flex flex-wrap gap-2 sm:gap-3 justify-center mt-6">
         {METRICS.map((m) => (
           <motion.div
             key={m.label}
@@ -124,9 +124,9 @@ function WorkflowVisual() {
               border: `1px solid ${m.color.replace('0.9', '0.25')}`,
               boxShadow: `0 0 20px ${m.color.replace('0.9', '0.07')}`,
             }}
-            className="rounded-xl px-5 py-3 text-center min-w-[110px]"
+            className="rounded-xl px-3 sm:px-5 py-2.5 sm:py-3 text-center min-w-[90px] sm:min-w-[110px]"
           >
-            <div className="text-2xl font-bold text-white leading-none">{m.value}</div>
+            <div className="text-xl sm:text-2xl font-bold text-white leading-none">{m.value}</div>
             <div className="text-[9px] text-neutral-400 mt-1 tracking-wide uppercase">{m.label}</div>
           </motion.div>
         ))}
@@ -194,7 +194,7 @@ export default function Hero() {
       {/* ── Content: grows to fill viewport, split 50/50 ── */}
       <div className="flex flex-col md:flex-row flex-1 min-h-screen">
           {/* ── Left: Copy ── */}
-          <div className="flex-1 flex flex-col justify-center px-8 md:px-20 py-28 md:py-0 relative z-10">
+          <div className="flex-1 flex flex-col justify-center px-6 sm:px-10 md:px-20 py-28 md:py-0 relative z-10">
             {/* Badge */}
             <motion.div
               {...fadeUp(0.15)}
@@ -234,17 +234,17 @@ export default function Hero() {
             {/* Subtitle */}
             <motion.p
               {...fadeUp(0.55)}
-              className="text-[clamp(13px,1.3vw,15px)] text-neutral-400 leading-relaxed max-w-[380px] mb-10"
+              className="text-[clamp(13px,1.3vw,15px)] text-neutral-400 leading-relaxed max-w-full sm:max-w-[380px] mb-10"
             >
               We design personalized AI workflows and build AI-powered platforms that save time, reduce operational costs, and grow your business.
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div {...fadeUp(0.7)} className="flex gap-4 flex-wrap">
+            <motion.div {...fadeUp(0.7)} className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-wrap">
               <div className="tech-bracket">
                 <a
                   href="#access"
-                  className="inline-flex items-center justify-center px-8 py-3.5
+                  className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3.5
                     text-[11px] font-bold tracking-[1.8px] uppercase rounded-sm
                     bg-white text-black transition-all duration-300 hover:bg-neutral-200"
                 >
@@ -254,7 +254,7 @@ export default function Hero() {
               <div className="tech-bracket">
                 <a
                   href="#services"
-                  className="inline-flex items-center gap-2 justify-center px-8 py-3.5
+                  className="inline-flex items-center gap-2 justify-center w-full sm:w-auto px-8 py-3.5
                     text-[11px] font-medium tracking-[1.8px] uppercase rounded-sm
                     border border-white/10 text-neutral-300
                     hover:border-white/30 hover:bg-white/[0.04] transition-all duration-300"
@@ -285,7 +285,7 @@ export default function Hero() {
           </div>
 
           {/* ── Right: Animated workflow visual ── */}
-          <div className="flex-1 relative border-t md:border-t-0 md:border-l border-white/[0.05]">
+          <div className="flex-1 relative border-t md:border-t-0 md:border-l border-white/[0.05] min-h-[420px] md:min-h-0">
             <WorkflowVisual />
           </div>
         </div>

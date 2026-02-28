@@ -22,7 +22,7 @@ export default function Features() {
   const [hoveredIdx, setHoveredIdx] = useState(0);
 
   return (
-    <section id="services" className="relative z-10 py-[150px] px-[clamp(24px,4vw,64px)] w-full overflow-hidden">
+    <section id="services" className="relative z-10 py-[clamp(60px,10vh,150px)] px-[clamp(16px,4vw,64px)] w-full overflow-hidden">
 
       {/* Background Giant Text */}
       <div className="absolute top-[20%] left-[-5%] text-[clamp(100px,25vw,350px)] font-bold font-sans text-[var(--c-text)] opacity-[0.02] pointer-events-none select-none tracking-tighter mix-blend-overlay">
@@ -49,8 +49,9 @@ export default function Features() {
             {services.map((item, i) => (
               <div
                 key={i}
-                className="group relative flex flex-col justify-center py-8 border-b border-[rgba(255,255,255,0.08)] cursor-pointer"
+                className="group relative flex flex-col justify-center py-6 sm:py-8 border-b border-[rgba(255,255,255,0.08)] cursor-pointer"
                 onMouseEnter={() => setHoveredIdx(i)}
+                onClick={() => setHoveredIdx(i)}
               >
                 {/* Title */}
                 <h3 className={`font-sans text-[clamp(20px,2vw,28px)] font-bold transition-all duration-500 mb-2 ${hoveredIdx === i ? 'text-[var(--c-accent)] translate-x-4' : 'text-[var(--c-text)]'}`}>
@@ -73,7 +74,7 @@ export default function Features() {
           </div>
 
           {/* Static Image Box that swaps on hover */}
-          <div className="w-full md:w-1/2 flex-1 border border-[rgba(255,255,255,0.1)] p-2 relative overflow-hidden tech-bracket min-h-[400px]">
+          <div className="w-full md:w-1/2 flex-1 border border-[rgba(255,255,255,0.1)] p-2 relative overflow-hidden tech-bracket min-h-[260px] sm:min-h-[320px] md:min-h-[400px]">
             {services.map((item, i) => (
               <img
                 key={i}
