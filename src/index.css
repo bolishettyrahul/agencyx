@@ -12,6 +12,26 @@
   --c-accent: #e5e5e5;
   --c-accent-dim: rgba(255, 255, 255, 0.1);
   --c-accent-glow: rgba(255, 255, 255, 0.2);
+
+  /* ── shadcn/ui CSS variables (dark theme) ── */
+  --background: 5 5 5;
+  --foreground: 230 230 230;
+  --card: 12 12 16;
+  --card-foreground: 230 230 230;
+  --primary: 139 92 246;
+  --primary-foreground: 255 255 255;
+  --secondary: 30 30 40;
+  --secondary-foreground: 200 200 200;
+  --muted: 25 25 30;
+  --muted-foreground: 130 130 150;
+  --accent: 99 102 241;
+  --accent-foreground: 255 255 255;
+  --destructive: 239 68 68;
+  --destructive-foreground: 255 255 255;
+  --border: 255 255 255 / 0.08;
+  --input: 255 255 255 / 0.07;
+  --ring: 139 92 246;
+  --radius: 0.75rem;
 }
 
 /* ═══ Global Aesthetics ═══ */
@@ -198,6 +218,31 @@ html {
   backdrop-filter: blur(24px) !important;
   -webkit-backdrop-filter: blur(24px) !important;
   border-bottom-color: var(--c-glass-border) !important;
+}
+
+/* ═══ Spotlight animation (Aceternity) ═══ */
+@keyframes spotlight {
+  0%   { opacity: 0; transform: translate(-72%, -62%) rotate(20deg) scale(0.8); }
+  100% { opacity: 1; transform: translate(-50%, -40%) rotate(20deg) scale(1); }
+}
+
+.animate-spotlight {
+  animation: spotlight 2s ease forwards;
+}
+
+/* ═══ Spline lazy-load spinner ═══ */
+.spline-loader {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-top-color: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  animation: spline-spin 0.8s linear infinite;
+}
+
+@keyframes spline-spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ═══ Content Visibility — defer paint for off-screen sections ═══ */

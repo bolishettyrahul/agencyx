@@ -1,4 +1,3 @@
-import VideoBackground from './components/VideoBackground'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Overview from './components/Overview'
@@ -19,9 +18,6 @@ export default function App() {
         <rect width="100%" height="100%" filter="url(#noiseFilter)" />
       </svg>
       <div className="struct-grid"></div>
-
-      {/* Fixed video background  persists across entire page */}
-      <VideoBackground />
 
       {/* Cursor glow effect (desktop only) */}
       <CursorGlow />
