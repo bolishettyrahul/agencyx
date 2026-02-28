@@ -1,8 +1,7 @@
-import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { gsap } from 'gsap'
-import SplitType from 'split-type'
 import { Spotlight } from '@/components/ui/spotlight'
+
+const HEADLINE_LINES = ['Automate Smarter.', 'Reduce Costs.', 'Scale Efficiently.']
 
 /* ─────────────────────────────────────────────
    Workflow node definitions
@@ -156,32 +155,16 @@ function WorkflowVisual() {
 /* ─────────────────────────────────────────────
    Main Hero
 ───────────────────────────────────────────── */
-export default function Hero() {
-  const heroRef     = useRef(null)
-  const headlineRef = useRef(null)
-  const subRef      = useRef(null)
-  const btnsRef     = useRef(null)
-  const badgeRef    = useRef(null)
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 22 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.85, delay, ease: [0.16, 1, 0.3, 1] },
+})
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const split = new SplitType(headlineRef.current, { types: 'lines,words' })
-      gsap.set(split.words, { yPercent: 110, opacity: 0 })
-      gsap.to(split.words, {
-        yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.04, ease: 'power4.out', delay: 0.2,
-      })
-      gsap.fromTo(
-        [badgeRef.current, subRef.current, btnsRef.current],
-        { autoAlpha: 0, y: 20 },
-        { autoAlpha: 1, y: 0, duration: 0.85, stagger: 0.12, ease: 'power3.out', delay: 0.6 }
-      )
-    }, heroRef)
-    return () => ctx.revert()
-  }, [])
+export default function Hero() {
 
   return (
     <section
-      ref={heroRef}
       className="relative z-10 w-full min-h-screen flex flex-col"
     >
       {/* ── Full-screen ambient background ── */}
@@ -213,8 +196,8 @@ export default function Hero() {
           {/* ── Left: Copy ── */}
           <div className="flex-1 flex flex-col justify-center px-8 md:px-20 py-28 md:py-0 relative z-10">
             {/* Badge */}
-            <div
-              ref={badgeRef}
+            <motion.div
+              {...fadeUp(0.15)}
               className="inline-flex items-center gap-2 mb-6 self-start px-3 py-1 rounded-full border border-white/10 bg-white/[0.04]"
             >
               <span
@@ -224,38 +207,40 @@ export default function Hero() {
               <span className="text-[11px] tracking-[2.5px] uppercase font-medium text-neutral-400">
                 AI Automation Agency
               </span>
-            </div>
+            </motion.div>
 
             {/* Headline */}
-            <div className="overflow-hidden mb-5">
-              <h1
-                ref={headlineRef}
-                className="font-bold leading-[1.06] tracking-tight text-[clamp(34px,5vw,68px)]"
-                style={{
-                  background: 'linear-gradient(140deg,#f5f5f5 0%,#a3a3a3 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                Automate Smarter.
-                <br />
-                Reduce Costs.
-                <br />
-                Scale Efficiently.
-              </h1>
+            <div className="mb-5">
+              {HEADLINE_LINES.map((line, i) => (
+                <div key={line} className="overflow-hidden">
+                  <motion.h1
+                    initial={{ yPercent: 110, opacity: 0 }}
+                    animate={{ yPercent: 0, opacity: 1 }}
+                    transition={{ duration: 1.1, delay: 0.2 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    className="font-bold leading-[1.06] tracking-tight text-[clamp(34px,5vw,68px)]"
+                    style={{
+                      background: 'linear-gradient(140deg,#f5f5f5 0%,#a3a3a3 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    {line}
+                  </motion.h1>
+                </div>
+              ))}
             </div>
 
             {/* Subtitle */}
-            <p
-              ref={subRef}
+            <motion.p
+              {...fadeUp(0.55)}
               className="text-[clamp(13px,1.3vw,15px)] text-neutral-400 leading-relaxed max-w-[380px] mb-10"
             >
               We design personalized AI workflows and build AI-powered platforms that save time, reduce operational costs, and grow your business.
-            </p>
+            </motion.p>
 
             {/* CTA Buttons */}
-            <div ref={btnsRef} className="flex gap-4 flex-wrap">
+            <motion.div {...fadeUp(0.7)} className="flex gap-4 flex-wrap">
               <div className="tech-bracket">
                 <a
                   href="#access"
@@ -280,10 +265,10 @@ export default function Hero() {
                   </svg>
                 </a>
               </div>
-            </div>
+            </motion.div>
 
             {/* Stats */}
-            <div className="flex gap-7 mt-10 pt-8 border-t border-white/[0.06]">
+            <motion.div {...fadeUp(0.85)} className="flex gap-7 mt-10 pt-8 border-t border-white/[0.06]">
               {[
                 { value: '50+',  label: 'Projects' },
                 { value: '10×',  label: 'Avg ROI'  },
@@ -296,7 +281,7 @@ export default function Hero() {
                   <div className="text-[9px] tracking-[2.5px] uppercase text-neutral-500">{label}</div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* ── Right: Animated workflow visual ── */}
